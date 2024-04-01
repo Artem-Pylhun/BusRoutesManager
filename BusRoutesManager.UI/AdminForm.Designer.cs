@@ -78,9 +78,9 @@
             dtpBusStationShiftEnd = new DateTimePicker();
             dtpBusStationShiftStart = new DateTimePicker();
             cbBusStationCity = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            btnDelBusStation = new Button();
+            btnEditBusStation = new Button();
+            btnAddBusStation = new Button();
             tbBusStationAddress = new TextBox();
             tbBusStationTitle = new TextBox();
             lbBusStations = new ListBox();
@@ -589,9 +589,9 @@
             tabPage3.Controls.Add(dtpBusStationShiftEnd);
             tabPage3.Controls.Add(dtpBusStationShiftStart);
             tabPage3.Controls.Add(cbBusStationCity);
-            tabPage3.Controls.Add(button1);
-            tabPage3.Controls.Add(button2);
-            tabPage3.Controls.Add(button3);
+            tabPage3.Controls.Add(btnDelBusStation);
+            tabPage3.Controls.Add(btnEditBusStation);
+            tabPage3.Controls.Add(btnAddBusStation);
             tabPage3.Controls.Add(tbBusStationAddress);
             tabPage3.Controls.Add(tbBusStationTitle);
             tabPage3.Controls.Add(lbBusStations);
@@ -618,6 +618,7 @@
             // 
             // dtpBusStationShiftEnd
             // 
+            dtpBusStationShiftEnd.Format = DateTimePickerFormat.Custom;
             dtpBusStationShiftEnd.Location = new Point(541, 314);
             dtpBusStationShiftEnd.Name = "dtpBusStationShiftEnd";
             dtpBusStationShiftEnd.Size = new Size(170, 27);
@@ -625,6 +626,7 @@
             // 
             // dtpBusStationShiftStart
             // 
+            dtpBusStationShiftStart.Format = DateTimePickerFormat.Custom;
             dtpBusStationShiftStart.Location = new Point(541, 255);
             dtpBusStationShiftStart.Name = "dtpBusStationShiftStart";
             dtpBusStationShiftStart.Size = new Size(170, 27);
@@ -632,44 +634,45 @@
             // 
             // cbBusStationCity
             // 
+            cbBusStationCity.DropDownStyle = ComboBoxStyle.DropDownList;
             cbBusStationCity.FormattingEnabled = true;
             cbBusStationCity.Location = new Point(559, 138);
             cbBusStationCity.Name = "cbBusStationCity";
             cbBusStationCity.Size = new Size(139, 28);
             cbBusStationCity.TabIndex = 21;
             // 
-            // button1
+            // btnDelBusStation
             // 
-            button1.Location = new Point(608, 377);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 18;
-            button1.Tag = "del";
-            button1.Text = "Delete";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btnBusStation;
+            btnDelBusStation.Location = new Point(608, 377);
+            btnDelBusStation.Name = "btnDelBusStation";
+            btnDelBusStation.Size = new Size(94, 29);
+            btnDelBusStation.TabIndex = 18;
+            btnDelBusStation.Tag = "del";
+            btnDelBusStation.Text = "Delete";
+            btnDelBusStation.UseVisualStyleBackColor = true;
+            btnDelBusStation.Click += btnBusStation;
             // 
-            // button2
+            // btnEditBusStation
             // 
-            button2.Location = new Point(508, 377);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 19;
-            button2.Tag = "edit";
-            button2.Text = "Edit";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += btnBusStation;
+            btnEditBusStation.Location = new Point(508, 377);
+            btnEditBusStation.Name = "btnEditBusStation";
+            btnEditBusStation.Size = new Size(94, 29);
+            btnEditBusStation.TabIndex = 19;
+            btnEditBusStation.Tag = "edit";
+            btnEditBusStation.Text = "Edit";
+            btnEditBusStation.UseVisualStyleBackColor = true;
+            btnEditBusStation.Click += btnBusStation;
             // 
-            // button3
+            // btnAddBusStation
             // 
-            button3.Location = new Point(406, 377);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 20;
-            button3.Tag = "add";
-            button3.Text = "Add";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += btnBusStation;
+            btnAddBusStation.Location = new Point(406, 377);
+            btnAddBusStation.Name = "btnAddBusStation";
+            btnAddBusStation.Size = new Size(94, 29);
+            btnAddBusStation.TabIndex = 20;
+            btnAddBusStation.Tag = "add";
+            btnAddBusStation.Text = "Add";
+            btnAddBusStation.UseVisualStyleBackColor = true;
+            btnAddBusStation.Click += btnBusStation;
             // 
             // tbBusStationAddress
             // 
@@ -692,6 +695,7 @@
             lbBusStations.Name = "lbBusStations";
             lbBusStations.Size = new Size(203, 284);
             lbBusStations.TabIndex = 16;
+            lbBusStations.SelectedIndexChanged += lbBusStations_SelectedIndexChanged;
             // 
             // label18
             // 
@@ -897,9 +901,9 @@
         private Button btnDelDriver;
         private Button btnEditDriver;
         private Button btnAddDriver;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button btnDelBusStation;
+        private Button btnEditBusStation;
+        private Button btnAddBusStation;
         private TextBox tbBusStationTitle;
         private ListBox lbBusStations;
         private Label label18;

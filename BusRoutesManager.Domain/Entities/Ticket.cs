@@ -22,5 +22,7 @@ namespace BusRoutesManager.Domain.Entities
         [ForeignKey("DepartureStation")]
         public int DepartureStationId { get; set; }
         public virtual BusStation DepartureStation { get; set; }
+
+        public DateTime RouteDate { get; set; }
     }
 }

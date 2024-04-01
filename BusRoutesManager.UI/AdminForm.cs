@@ -49,6 +49,7 @@ namespace BusRoutesManager.UI
             lbDrivers.Items.AddRange(driverRepository.GetAll().Select(d => $"{d.FullName}, {d.Age}, {d.MobilePhone}").ToArray());
             lbUsers.Items.AddRange(userRepository.GetAll().Select(u => $"{u.FullName}, {u.DateOfBirth.ToShortDateString()}, {u.Email}, Admin: {u.IsAdmin}").ToArray());
             lbCities.Items.AddRange(cityRepository.GetAll().Select(c => c.Title).ToArray());
+            lbBusStations.Items.AddRange(busStationRepository.GetAll().Select(b => $"{b.Title}, {b.City.Title}, {b.Address}, {b.ShiftStart}-{b.ShiftEnd}").ToArray());
             //combo boxes
             cbBusModel.Items.AddRange(modelRepository.GetAll().Select(x => x.Title).ToArray());
             cbBusStationCity.Items.AddRange(cityRepository.GetAll().Select(x => x.Title).ToArray());
@@ -67,8 +68,12 @@ namespace BusRoutesManager.UI
 
             btnEditCity.Enabled = false;
             btnDelCity.Enabled = false;
-            //other components
 
+            btnEditBusStation.Enabled = false;
+            btnDelBusStation.Enabled = false;
+            //other components
+            dtpBusStationShiftEnd.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dtpBusStationShiftStart.CustomFormat = "MM/dd/yyyy hh:mm:ss";
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -459,59 +464,75 @@ namespace BusRoutesManager.UI
             switch (button.Tag.ToString())
             {
                 case "add":
-                    if (cbBusModel.SelectedIndex != -1 && regex.IsMatch(tbBusPlateNum.Text))
+                    if (cbBusStationCity.SelectedIndex != -1
+                        && tbBusStationTitle.Text != string.Empty
+                        && tbBusStationAddress.Text != string.Empty
+                        && dtpBusStationShiftStart.Value.TimeOfDay < dtpBusStationShiftEnd.Value.TimeOfDay)
                     {
-                        busRepository.Insert(new Bus()
+                        busStationRepository.Insert(new BusStation()
                         {
-                            Model = modelRepository.GetAll().FirstOrDefault(x => x.Title == cbBusModel.SelectedItem.ToString()),
-                            Capacity = (int)nudBusCapacity.Value,
-                            PlateNumber = tbBusPlateNum.Text
+                            Title = tbBusStationTitle.Text,
+                            City = cityRepository.GetAll().FirstOrDefault(x => x.Title == cbBusStationCity.SelectedItem.ToString()),
+                            Address = tbBusStationAddress.Text,
+                            ShiftStart = dtpBusStationShiftStart.Value,
+                            ShiftEnd = dtpBusStationShiftStart.Value
                         });
-                        busRepository.SaveChanges();
-                        UpdateBusListBox();
+                        busStationRepository.SaveChanges();
+                        UpdateBusStationsListBox();
                     }
                     else
                     {
-                        MessageBox.Show("Bus can't be added. Fill in all the text boxes.", "Adding Bus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Bus station can't be added. Fill in all the text boxes.", "Adding Bus Station", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     break;
                 case "edit":
-                    if (cbBusModel.SelectedIndex != -1 && regex.IsMatch(tbBusPlateNum.Text))
+                    if (cbBusStationCity.SelectedIndex != -1
+                        && tbBusStationTitle.Text != string.Empty
+                        && tbBusStationAddress.Text != string.Empty
+                        && dtpBusStationShiftStart.Value.TimeOfDay < dtpBusStationShiftEnd.Value.TimeOfDay)
                     {
-                        var current_model = modelRepository.GetAll().FirstOrDefault(x => x.Title == cbBusModel.SelectedItem.ToString());
-                        var currentBus = busRepository.GetAll().FirstOrDefault(x => x.Id == int.Parse(lbBuses.SelectedItem.ToString().Split(" ")[0]));
-                        currentBus.Model = current_model;
-                        currentBus.Capacity = (int)nudBusCapacity.Value;
-                        currentBus.PlateNumber = tbBusPlateNum.Text;
-                        busRepository.SaveChanges();
+                        var current_city = cityRepository.GetAll().FirstOrDefault(x => x.Title == cbBusStationCity.SelectedItem.ToString());
+                        var currentBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(" ")[0].Trim() && x.City == current_city);
+                        currentBusStation.Title = tbBusStationTitle.Text;
+                        currentBusStation.City = current_city;
+                        currentBusStation.Address = tbBusStationAddress.Text;
+                        currentBusStation.ShiftStart = dtpBusStationShiftStart.Value;
+                        currentBusStation.ShiftEnd = dtpBusStationShiftEnd.Value;
+                        busStationRepository.Update(currentBusStation);
+                        busStationRepository.SaveChanges();
                         UpdateBusListBox();
                     }
                     break;
                 case "del":
-                    if (lbBuses.SelectedIndex != -1)
+                    if (lbBusStations.SelectedIndex != -1)
                     {
-                        string selectedBusStr = lbBuses.SelectedItem.ToString();
-                        int selectedBusId = int.Parse(selectedBusStr.Split(" ")[0]);
-
-                        if (selectedBusId <= 0)
+                        var current_city = cityRepository.GetAll().FirstOrDefault(x => x.Title == cbBusStationCity.SelectedItem.ToString());
+                        var currentBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(" ")[0].Trim() && x.City == current_city);
+                        if (currentBusStation == null)
                         {
-                            MessageBox.Show("Bus doesn't exist.", "Deleting Bus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Bus station doesn't exist.", "Deleting Bus Station", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                        busRepository.Delete(selectedBusId);
-                        busRepository.SaveChanges();
-                        UpdateBusListBox();
-                        MessageBox.Show("Bus was deleted successfully", "Deleting Bus", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        busStationRepository.Delete(currentBusStation);
+                        busStationRepository.SaveChanges();
+                        UpdateBusStationsListBox();
+                        MessageBox.Show("Bus station was deleted successfully", "Deleting Bus Station", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
                     else
                     {
-                        MessageBox.Show("Bus can't be deleted. Did you pick it in listbox?", "Deleting Bus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Bus station can't be deleted. Did you pick it in listbox?", "Deleting Bus", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     break;
             }
         }
         private void UpdateBusStationsListBox()
         {
+            lbBusStations.Items.Clear();
+            lbBusStations.Items.AddRange(busStationRepository.GetAll().Select(b => $"{b.Title}, {b.City.Title}, {b.Address}, {b.ShiftStart}-{b.ShiftEnd}").ToArray());
+            tbBusStationTitle.Text = string.Empty;
+            tbBusStationAddress.Text = string.Empty;
+            dtpBusStationShiftStart.Value = DateTime.Now.Date.AddHours(0);
+            dtpBusStationShiftEnd.Value = DateTime.Now.Date.AddHours(12);
             cbBusStationCity.SelectedIndex = -1;
         }
         private void lbBuses_SelectedIndexChanged(object sender, EventArgs e)
@@ -572,7 +593,20 @@ namespace BusRoutesManager.UI
 
         }
 
-        
+        private void lbBusStations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbBusStations.SelectedIndex != -1)
+            {
+                btnEditBusStation.Enabled = true;
+                btnDelBusStation.Enabled = true;
+                BusStation selectedBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split()[0].Trim() && x.City.Title == lbBusStations.SelectedItem.ToString().Split()[1].Trim());
+                tbBusStationTitle.Text = selectedBusStation.Title;
+                cbBusStationCity.SelectedItem = selectedBusStation.City.Title;
+                tbBusStationAddress.Text = selectedBusStation.Address;
+                dtpBusStationShiftStart.Value = selectedBusStation.ShiftStart;
+                dtpBusStationShiftEnd.Value = selectedBusStation.ShiftEnd;
+            }
+        }
     }
 
 
