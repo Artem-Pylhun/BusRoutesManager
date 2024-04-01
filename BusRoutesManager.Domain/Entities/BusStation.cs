@@ -14,6 +14,7 @@ namespace BusRoutesManager.Domain.Entities
         public DateTime ShiftStart { get; set; }
         public DateTime ShiftEnd { get; set; }
         public virtual ICollection<RouteNode> RouteNodes { get; set; } = new HashSet<RouteNode>();
-        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+        public virtual ICollection<Ticket> ArrivalTickets { get; set; } = new List<Ticket>();
+        public virtual ICollection<Ticket> DepartureTickets { get; set; } = new List<Ticket>();
     }
 }

@@ -13,10 +13,9 @@ namespace BusRoutesManager.Domain.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public virtual Route Route{ get; set; }
         public virtual User User{ get; set; }
         public float Price { get; set; }
-        public virtual BusStation ArrivalStationId { get; set; }
-        public virtual BusStation DepartureStationId { get; set; }
+        public virtual BusStation ArrivalStation { get; set; }
+        public virtual BusStation DepartureStation { get; set; }
     }
 }

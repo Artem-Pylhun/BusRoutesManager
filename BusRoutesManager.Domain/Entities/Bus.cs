@@ -16,7 +16,7 @@ namespace BusRoutesManager.Domain.Entities
         public virtual Model Model { get; set; }
         public int Capacity { get; set; }
         public string PlateNumber { get; set; }
-
+         
         public virtual ICollection<Route> Routes { get; set; } = new HashSet<Route>();
     }
 }

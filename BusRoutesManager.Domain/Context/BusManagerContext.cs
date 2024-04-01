@@ -29,5 +29,15 @@ namespace BusRoutesManager.Domain.Context
             optionsBuilder.UseLazyLoadingProxies().UseSqlServer("Server=.;Database=BusDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
             base.OnConfiguring(optionsBuilder);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.ArrivalStation)
+                .WithMany(s => s.ArrivalTickets);
+
+            modelBuilder.Entity<Ticket>()
+                .HasOne(t => t.DepartureStation)
+                .WithMany(s => s.DepartureTickets);
+        }
     }
 }
