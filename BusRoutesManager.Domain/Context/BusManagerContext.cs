@@ -33,11 +33,16 @@ namespace BusRoutesManager.Domain.Context
         {
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.ArrivalStation)
-                .WithMany(s => s.ArrivalTickets);
+                .WithMany(s => s.ArrivalTickets)
+                .HasForeignKey(t => t.ArrivalStationId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Ticket>()
                 .HasOne(t => t.DepartureStation)
-                .WithMany(s => s.DepartureTickets);
+                .WithMany(s => s.DepartureTickets)
+                .HasForeignKey(t => t.DepartureStationId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
+
     }
 }
