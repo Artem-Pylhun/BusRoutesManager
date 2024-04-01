@@ -15,86 +15,55 @@ namespace BusRoutesManager.Repositories
         /// <summary>
         /// {Interface} Описано в інтерфейсі IRepository
         /// </summary>
-        public async Task<IEnumerable<TEntity>> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
-            return await Task.Run(() => _dbSet.ToList());
+            return _dbSet.ToList();
         }
         /// <summary>
         /// {Interface} Описано в інтерфейсі IRepository
         /// </summary>
-        public async Task<IEnumerable<TEntity>> Get(
-                                    Expression<Func<TEntity, bool>> filter = null,
-                                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                    params Expression<Func<TEntity, object>>[] includes)
+        public TEntity GetById(int id)
         {
-            return await Task.Run(() =>
-            {
-                IQueryable<TEntity> query = _dbSet;
+            return _dbSet.Find(id);
+        }
+        /// <summary>
+        /// {Interface} Описано в інтерфейсі IRepository
+        /// </summary>
+        public void Insert(TEntity entity)
+        {
+            _dbSet.Add(entity);
+        }
+        /// <summary>
+        /// {Interface} Описано в інтерфейсі IRepository
+        /// </summary>
+        public void Update(TEntity entity)
+        {
+            _dbSet.Update(entity);
+        }
+        /// <summary>
+        /// {Interface} Описано в інтерфейсі IRepository
+        /// </summary>
+        public void Delete(int id)
+        {
+            TEntity entityToDelete = _dbSet.Find(id);
+            Delete(entityToDelete);
+        }
+        /// <summary>
+        /// {Interface} Описано в інтерфейсі IRepository
+        /// </summary>
+        public void Delete(TEntity entity)
+        {
+            if (_context.Entry(entity).State == EntityState.Detached)
+                _dbSet.Attach(entity);
 
-                if (filter != null)
-                    query = query.Where(filter);
-
-                foreach (var include in includes)
-                    query = query.Include(include);
-
-                if (orderBy != null)
-                    return orderBy(query).ToList();
-                else
-                    return [.. query];
-            });
+            _dbSet.Remove(entity);
         }
         /// <summary>
         /// {Interface} Описано в інтерфейсі IRepository
         /// </summary>
-        public async Task<TEntity> GetById(int id)
+        public void SaveChanges()
         {
-            return await Task.Run(() => _dbSet.Find(id));
-        }
-        /// <summary>
-        /// {Interface} Описано в інтерфейсі IRepository
-        /// </summary>
-        public async Task Insert(TEntity entity)
-        {
-            await Task.Run(() => _dbSet.Add(entity));
-        }
-        /// <summary>
-        /// {Interface} Описано в інтерфейсі IRepository
-        /// </summary>
-        public async Task Update(TEntity entity)
-        {
-            await Task.Run(() => _dbSet.Update(entity));
-        }
-        /// <summary>
-        /// {Interface} Описано в інтерфейсі IRepository
-        /// </summary>
-        public async Task Delete(int id)
-        {
-            await Task.Run(async () =>
-            {
-                TEntity entityToDelete = _dbSet.Find(id);
-
-                await Delete(entityToDelete);
-            });
-        }
-        /// <summary>
-        /// {Interface} Описано в інтерфейсі IRepository
-        /// </summary>
-        public async Task Delete(TEntity entity)
-        {
-            await Task.Run(() =>
-            {
-                if (_context.Entry(entity).State == EntityState.Detached)
-                    _dbSet.Attach(entity);
-
-                _dbSet.Remove(entity);
-            });
-        }
-        /// <summary>
-        /// {Interface} Описано в інтерфейсі IRepository
-        /// </summary>
-        public async Task SaveChanges()
-        {
-            await Task.Run(_context.SaveChanges);
+            _context.SaveChanges();
         }
     }
 }
