@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34707.107
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusRoutesManager.Domain", "BusRoutesManager.Domain\BusRoutesManager.Domain.csproj", "{671E5C05-6881-43BA-A87E-694DCE87CF3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusRoutesManager.Repositories", "BusRoutesManager.Repositories\BusRoutesManager.Repositories.csproj", "{3705CA59-3E79-4B40-9458-2434723F8A80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusRoutesManager.Initialiazer", "BusRoutesManager.Initialiazer\BusRoutesManager.Initialiazer.csproj", "{2123B79B-851C-4E57-9476-3F384A0D39B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusRoutesManager.UI", "BusRoutesManager.UI\BusRoutesManager.UI.csproj", "{6921F9BD-704C-43D1-8819-19341C2CB382}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{671E5C05-6881-43BA-A87E-694DCE87CF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671E5C05-6881-43BA-A87E-694DCE87CF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671E5C05-6881-43BA-A87E-694DCE87CF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671E5C05-6881-43BA-A87E-694DCE87CF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3705CA59-3E79-4B40-9458-2434723F8A80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3705CA59-3E79-4B40-9458-2434723F8A80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3705CA59-3E79-4B40-9458-2434723F8A80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3705CA59-3E79-4B40-9458-2434723F8A80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2123B79B-851C-4E57-9476-3F384A0D39B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2123B79B-851C-4E57-9476-3F384A0D39B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2123B79B-851C-4E57-9476-3F384A0D39B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2123B79B-851C-4E57-9476-3F384A0D39B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6921F9BD-704C-43D1-8819-19341C2CB382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6921F9BD-704C-43D1-8819-19341C2CB382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6921F9BD-704C-43D1-8819-19341C2CB382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6921F9BD-704C-43D1-8819-19341C2CB382}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
