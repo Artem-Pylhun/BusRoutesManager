@@ -57,6 +57,7 @@ namespace BusRoutesManager.Repositories
                 _dbSet.Attach(entity);
 
             _dbSet.Remove(entity);
+
         }
         /// <summary>
         /// {Interface} Описано в інтерфейсі IRepository

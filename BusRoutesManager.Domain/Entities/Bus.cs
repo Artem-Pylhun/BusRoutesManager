@@ -18,5 +18,6 @@ namespace BusRoutesManager.Domain.Entities
         public string PlateNumber { get; set; }
          
         public virtual ICollection<Route> Routes { get; set; } = new HashSet<Route>();
+
     }
 }
