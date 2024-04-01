@@ -55,23 +55,21 @@ namespace BusRoutesManager.UI
 
             if (currentUser.IsAdmin)
             {
-                //Create admin form
-                /*
-                FormAdmin child = new FormAdmin(this, _ctx);
+                
+                AdminForm child = new AdminForm(this, _ctx);
                 child.Show();
                 this.Enabled = false;
                 this.Hide();
-                */
+                
             }
             else
             {
-                //Create user form
-                /*
-                FormUser child = new FormUser(this, _ctx, currentUser.Id);
+
+                UserForm child = new UserForm(this, _ctx, currentUser.Id);
                 child.Show();
                 this.Enabled = false;
                 this.Hide();
-                */
+
             }
 
         }
