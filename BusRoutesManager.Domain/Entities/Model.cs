@@ -14,6 +14,6 @@ namespace BusRoutesManager.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Title { get; set; }
-        public virtual ICollection<Bus> Busses { get; set; } = new HashSet<Bus>();
+        public virtual ICollection<Bus> Buses { get; set; } = new HashSet<Bus>();
     }
 }
