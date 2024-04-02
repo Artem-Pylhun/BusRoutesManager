@@ -97,13 +97,59 @@
             lbCities = new ListBox();
             label16 = new Label();
             label17 = new Label();
+            tabPage5 = new TabPage();
+            label29 = new Label();
+            label28 = new Label();
+            label27 = new Label();
+            label26 = new Label();
+            label24 = new Label();
+            lbTickets = new ListBox();
+            btnAddTicket = new Button();
+            btnEditTicket = new Button();
+            btnDelTicket = new Button();
+            cbTicketUser = new ComboBox();
+            cbTicketArrivalStation = new ComboBox();
+            cbTicketDepartureStation = new ComboBox();
+            label34 = new Label();
+            label32 = new Label();
+            label30 = new Label();
+            label25 = new Label();
+            lbRouteNodes = new ListBox();
+            btnAddRouteNode = new Button();
+            btnEditRouteNode = new Button();
+            btnDelRouteNode = new Button();
+            cbRouteNodeStation = new ComboBox();
+            dtpRouteNodeArrivalTime = new DateTimePicker();
+            dtpTicketRouteDate = new DateTimePicker();
+            nudTicketPrice = new NumericUpDown();
             tabPage4 = new TabPage();
+            label31 = new Label();
+            cbRouteNodeRoute = new ComboBox();
+            numericUpDown1 = new NumericUpDown();
+            dateTimePicker1 = new DateTimePicker();
+            label33 = new Label();
+            comboBox2 = new ComboBox();
+            comboBox3 = new ComboBox();
+            btnDelRoute = new Button();
+            btnEditRoute = new Button();
+            btnAddRoute = new Button();
+            lbRoutes = new ListBox();
+            label35 = new Label();
+            label37 = new Label();
+            label38 = new Label();
+            label39 = new Label();
+            label36 = new Label();
+            dateTimePicker2 = new DateTimePicker();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudBusCapacity).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudDriverAge).BeginInit();
             tabPage3.SuspendLayout();
+            tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudTicketPrice).BeginInit();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -112,6 +158,7 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -820,15 +867,439 @@
             label17.TabIndex = 8;
             label17.Text = "Title";
             // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(numericUpDown1);
+            tabPage5.Controls.Add(dateTimePicker2);
+            tabPage5.Controls.Add(dateTimePicker1);
+            tabPage5.Controls.Add(label36);
+            tabPage5.Controls.Add(label33);
+            tabPage5.Controls.Add(comboBox2);
+            tabPage5.Controls.Add(comboBox3);
+            tabPage5.Controls.Add(btnDelRoute);
+            tabPage5.Controls.Add(btnEditRoute);
+            tabPage5.Controls.Add(btnAddRoute);
+            tabPage5.Controls.Add(lbRoutes);
+            tabPage5.Controls.Add(label35);
+            tabPage5.Controls.Add(label37);
+            tabPage5.Controls.Add(label38);
+            tabPage5.Controls.Add(label39);
+            tabPage5.Location = new Point(4, 29);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(719, 417);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Route";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(279, 52);
+            label29.Name = "label29";
+            label29.Size = new Size(38, 20);
+            label29.TabIndex = 28;
+            label29.Text = "User";
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Location = new Point(279, 113);
+            label28.Name = "label28";
+            label28.Size = new Size(41, 20);
+            label28.TabIndex = 27;
+            label28.Text = "Price";
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new Point(256, 174);
+            label27.Name = "label27";
+            label27.Size = new Size(103, 20);
+            label27.TabIndex = 26;
+            label27.Text = "Arrival Station";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(234, 230);
+            label26.Name = "label26";
+            label26.Size = new Size(127, 20);
+            label26.TabIndex = 25;
+            label26.Text = "Departure Station";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label24.Location = new Point(179, 18);
+            label24.Name = "label24";
+            label24.Size = new Size(79, 31);
+            label24.TabIndex = 23;
+            label24.Text = "Ticket";
+            // 
+            // lbTickets
+            // 
+            lbTickets.FormattingEnabled = true;
+            lbTickets.Location = new Point(17, 64);
+            lbTickets.Name = "lbTickets";
+            lbTickets.Size = new Size(203, 284);
+            lbTickets.TabIndex = 29;
+            // 
+            // btnAddTicket
+            // 
+            btnAddTicket.Location = new Point(42, 371);
+            btnAddTicket.Name = "btnAddTicket";
+            btnAddTicket.Size = new Size(94, 29);
+            btnAddTicket.TabIndex = 34;
+            btnAddTicket.Tag = "add";
+            btnAddTicket.Text = "Add";
+            btnAddTicket.UseVisualStyleBackColor = true;
+            // 
+            // btnEditTicket
+            // 
+            btnEditTicket.Location = new Point(144, 371);
+            btnEditTicket.Name = "btnEditTicket";
+            btnEditTicket.Size = new Size(94, 29);
+            btnEditTicket.TabIndex = 33;
+            btnEditTicket.Tag = "edit";
+            btnEditTicket.Text = "Edit";
+            btnEditTicket.UseVisualStyleBackColor = true;
+            // 
+            // btnDelTicket
+            // 
+            btnDelTicket.Location = new Point(244, 371);
+            btnDelTicket.Name = "btnDelTicket";
+            btnDelTicket.Size = new Size(94, 29);
+            btnDelTicket.TabIndex = 32;
+            btnDelTicket.Tag = "del";
+            btnDelTicket.Text = "Delete";
+            btnDelTicket.UseVisualStyleBackColor = true;
+            // 
+            // cbTicketUser
+            // 
+            cbTicketUser.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbTicketUser.FormattingEnabled = true;
+            cbTicketUser.Location = new Point(230, 82);
+            cbTicketUser.Name = "cbTicketUser";
+            cbTicketUser.Size = new Size(139, 28);
+            cbTicketUser.TabIndex = 35;
+            // 
+            // cbTicketArrivalStation
+            // 
+            cbTicketArrivalStation.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbTicketArrivalStation.FormattingEnabled = true;
+            cbTicketArrivalStation.Location = new Point(230, 199);
+            cbTicketArrivalStation.Name = "cbTicketArrivalStation";
+            cbTicketArrivalStation.Size = new Size(139, 28);
+            cbTicketArrivalStation.TabIndex = 35;
+            // 
+            // cbTicketDepartureStation
+            // 
+            cbTicketDepartureStation.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbTicketDepartureStation.FormattingEnabled = true;
+            cbTicketDepartureStation.Location = new Point(230, 253);
+            cbTicketDepartureStation.Name = "cbTicketDepartureStation";
+            cbTicketDepartureStation.Size = new Size(139, 28);
+            cbTicketDepartureStation.TabIndex = 35;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Location = new Point(605, 59);
+            label34.Name = "label34";
+            label34.Size = new Size(56, 20);
+            label34.TabIndex = 42;
+            label34.Text = "Station";
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Location = new Point(591, 200);
+            label32.Name = "label32";
+            label32.Size = new Size(89, 20);
+            label32.TabIndex = 40;
+            label32.Text = "Arrival Time";
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label30.Location = new Point(499, 6);
+            label30.Name = "label30";
+            label30.Size = new Size(141, 31);
+            label30.TabIndex = 38;
+            label30.Text = "Route Node";
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(256, 289);
+            label25.Name = "label25";
+            label25.Size = new Size(84, 20);
+            label25.TabIndex = 39;
+            label25.Text = "Route Date";
+            // 
+            // lbRouteNodes
+            // 
+            lbRouteNodes.FormattingEnabled = true;
+            lbRouteNodes.Location = new Point(389, 64);
+            lbRouteNodes.Name = "lbRouteNodes";
+            lbRouteNodes.Size = new Size(151, 284);
+            lbRouteNodes.TabIndex = 44;
+            // 
+            // btnAddRouteNode
+            // 
+            btnAddRouteNode.Location = new Point(411, 371);
+            btnAddRouteNode.Name = "btnAddRouteNode";
+            btnAddRouteNode.Size = new Size(94, 29);
+            btnAddRouteNode.TabIndex = 49;
+            btnAddRouteNode.Tag = "add";
+            btnAddRouteNode.Text = "Add";
+            btnAddRouteNode.UseVisualStyleBackColor = true;
+            // 
+            // btnEditRouteNode
+            // 
+            btnEditRouteNode.Location = new Point(513, 371);
+            btnEditRouteNode.Name = "btnEditRouteNode";
+            btnEditRouteNode.Size = new Size(94, 29);
+            btnEditRouteNode.TabIndex = 48;
+            btnEditRouteNode.Tag = "edit";
+            btnEditRouteNode.Text = "Edit";
+            btnEditRouteNode.UseVisualStyleBackColor = true;
+            // 
+            // btnDelRouteNode
+            // 
+            btnDelRouteNode.Location = new Point(613, 371);
+            btnDelRouteNode.Name = "btnDelRouteNode";
+            btnDelRouteNode.Size = new Size(94, 29);
+            btnDelRouteNode.TabIndex = 47;
+            btnDelRouteNode.Tag = "del";
+            btnDelRouteNode.Text = "Delete";
+            btnDelRouteNode.UseVisualStyleBackColor = true;
+            // 
+            // cbRouteNodeStation
+            // 
+            cbRouteNodeStation.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbRouteNodeStation.FormattingEnabled = true;
+            cbRouteNodeStation.Location = new Point(557, 82);
+            cbRouteNodeStation.Name = "cbRouteNodeStation";
+            cbRouteNodeStation.Size = new Size(150, 28);
+            cbRouteNodeStation.TabIndex = 50;
+            // 
+            // dtpRouteNodeArrivalTime
+            // 
+            dtpRouteNodeArrivalTime.Format = DateTimePickerFormat.Custom;
+            dtpRouteNodeArrivalTime.Location = new Point(557, 223);
+            dtpRouteNodeArrivalTime.Name = "dtpRouteNodeArrivalTime";
+            dtpRouteNodeArrivalTime.Size = new Size(150, 27);
+            dtpRouteNodeArrivalTime.TabIndex = 52;
+            // 
+            // dtpTicketRouteDate
+            // 
+            dtpTicketRouteDate.Format = DateTimePickerFormat.Custom;
+            dtpTicketRouteDate.Location = new Point(233, 312);
+            dtpTicketRouteDate.Name = "dtpTicketRouteDate";
+            dtpTicketRouteDate.Size = new Size(136, 27);
+            dtpTicketRouteDate.TabIndex = 51;
+            // 
+            // nudTicketPrice
+            // 
+            nudTicketPrice.Location = new Point(244, 140);
+            nudTicketPrice.Name = "nudTicketPrice";
+            nudTicketPrice.Size = new Size(117, 27);
+            nudTicketPrice.TabIndex = 53;
+            // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(nudTicketPrice);
+            tabPage4.Controls.Add(dtpTicketRouteDate);
+            tabPage4.Controls.Add(dtpRouteNodeArrivalTime);
+            tabPage4.Controls.Add(cbRouteNodeRoute);
+            tabPage4.Controls.Add(cbRouteNodeStation);
+            tabPage4.Controls.Add(btnDelRouteNode);
+            tabPage4.Controls.Add(btnEditRouteNode);
+            tabPage4.Controls.Add(btnAddRouteNode);
+            tabPage4.Controls.Add(lbRouteNodes);
+            tabPage4.Controls.Add(label25);
+            tabPage4.Controls.Add(label30);
+            tabPage4.Controls.Add(label32);
+            tabPage4.Controls.Add(label31);
+            tabPage4.Controls.Add(label34);
+            tabPage4.Controls.Add(cbTicketDepartureStation);
+            tabPage4.Controls.Add(cbTicketArrivalStation);
+            tabPage4.Controls.Add(cbTicketUser);
+            tabPage4.Controls.Add(btnDelTicket);
+            tabPage4.Controls.Add(btnEditTicket);
+            tabPage4.Controls.Add(btnAddTicket);
+            tabPage4.Controls.Add(lbTickets);
+            tabPage4.Controls.Add(label24);
+            tabPage4.Controls.Add(label26);
+            tabPage4.Controls.Add(label27);
+            tabPage4.Controls.Add(label28);
+            tabPage4.Controls.Add(label29);
             tabPage4.Location = new Point(4, 29);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
             tabPage4.Size = new Size(719, 417);
             tabPage4.TabIndex = 3;
-            tabPage4.Text = "tabPage4";
+            tabPage4.Text = "Ticket | Route Node";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Location = new Point(605, 127);
+            label31.Name = "label31";
+            label31.Size = new Size(48, 20);
+            label31.TabIndex = 42;
+            label31.Text = "Route";
+            // 
+            // cbRouteNodeRoute
+            // 
+            cbRouteNodeRoute.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbRouteNodeRoute.FormattingEnabled = true;
+            cbRouteNodeRoute.Location = new Point(557, 150);
+            cbRouteNodeRoute.Name = "cbRouteNodeRoute";
+            cbRouteNodeRoute.Size = new Size(150, 28);
+            cbRouteNodeRoute.TabIndex = 50;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(410, 199);
+            numericUpDown1.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
+            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(117, 27);
+            numericUpDown1.TabIndex = 68;
+            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new Point(399, 311);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(136, 27);
+            dateTimePicker1.TabIndex = 67;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Location = new Point(422, 288);
+            label33.Name = "label33";
+            label33.Size = new Size(89, 20);
+            label33.TabIndex = 66;
+            label33.Text = "Arrival Time";
+            // 
+            // comboBox2
+            // 
+            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(396, 145);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(139, 28);
+            comboBox2.TabIndex = 64;
+            // 
+            // comboBox3
+            // 
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(396, 81);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(139, 28);
+            comboBox3.TabIndex = 65;
+            // 
+            // btnDelRoute
+            // 
+            btnDelRoute.Location = new Point(410, 370);
+            btnDelRoute.Name = "btnDelRoute";
+            btnDelRoute.Size = new Size(94, 29);
+            btnDelRoute.TabIndex = 60;
+            btnDelRoute.Tag = "del";
+            btnDelRoute.Text = "Delete";
+            btnDelRoute.UseVisualStyleBackColor = true;
+            // 
+            // btnEditRoute
+            // 
+            btnEditRoute.Location = new Point(310, 370);
+            btnEditRoute.Name = "btnEditRoute";
+            btnEditRoute.Size = new Size(94, 29);
+            btnEditRoute.TabIndex = 61;
+            btnEditRoute.Tag = "edit";
+            btnEditRoute.Text = "Edit";
+            btnEditRoute.UseVisualStyleBackColor = true;
+            // 
+            // btnAddRoute
+            // 
+            btnAddRoute.Location = new Point(208, 370);
+            btnAddRoute.Name = "btnAddRoute";
+            btnAddRoute.Size = new Size(94, 29);
+            btnAddRoute.TabIndex = 62;
+            btnAddRoute.Tag = "add";
+            btnAddRoute.Text = "Add";
+            btnAddRoute.UseVisualStyleBackColor = true;
+            // 
+            // lbRoutes
+            // 
+            lbRoutes.FormattingEnabled = true;
+            lbRoutes.Location = new Point(183, 63);
+            lbRoutes.Name = "lbRoutes";
+            lbRoutes.Size = new Size(203, 284);
+            lbRoutes.TabIndex = 59;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label35.Location = new Point(345, 17);
+            label35.Name = "label35";
+            label35.Size = new Size(77, 31);
+            label35.TabIndex = 54;
+            label35.Text = "Route";
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(437, 122);
+            label37.Name = "label37";
+            label37.Size = new Size(49, 20);
+            label37.TabIndex = 56;
+            label37.Text = "Driver";
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Location = new Point(422, 176);
+            label38.Name = "label38";
+            label38.Size = new Size(95, 20);
+            label38.TabIndex = 57;
+            label38.Text = "Day Of Week";
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Location = new Point(445, 51);
+            label39.Name = "label39";
+            label39.Size = new Size(32, 20);
+            label39.TabIndex = 58;
+            label39.Text = "Bus";
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(422, 238);
+            label36.Name = "label36";
+            label36.Size = new Size(112, 20);
+            label36.TabIndex = 66;
+            label36.Text = "Departure Date";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.Location = new Point(399, 261);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(136, 27);
+            dateTimePicker2.TabIndex = 67;
             // 
             // AdminForm
             // 
@@ -848,6 +1319,12 @@
             ((System.ComponentModel.ISupportInitialize)nudDriverAge).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            tabPage5.ResumeLayout(false);
+            tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudTicketPrice).EndInit();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ResumeLayout(false);
         }
 
@@ -857,7 +1334,6 @@
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
-        private TabPage tabPage4;
         private Label label1;
         private ComboBox cbBusModel;
         private NumericUpDown nudBusCapacity;
@@ -923,5 +1399,48 @@
         private DateTimePicker dtpBusStationShiftStart;
         private Label label23;
         private Label label22;
+        private TabPage tabPage5;
+        private TabPage tabPage4;
+        private NumericUpDown nudTicketPrice;
+        private DateTimePicker dtpTicketRouteDate;
+        private DateTimePicker dtpRouteNodeArrivalTime;
+        private ComboBox cbRouteNodeRoute;
+        private ComboBox cbRouteNodeStation;
+        private Button btnDelRouteNode;
+        private Button btnEditRouteNode;
+        private Button btnAddRouteNode;
+        private ListBox lbRouteNodes;
+        private Label label25;
+        private Label label30;
+        private Label label32;
+        private Label label31;
+        private Label label34;
+        private ComboBox cbTicketDepartureStation;
+        private ComboBox cbTicketArrivalStation;
+        private ComboBox cbTicketUser;
+        private Button btnDelTicket;
+        private Button btnEditTicket;
+        private Button btnAddTicket;
+        private ListBox lbTickets;
+        private Label label24;
+        private Label label26;
+        private Label label27;
+        private Label label28;
+        private Label label29;
+        private NumericUpDown numericUpDown1;
+        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dateTimePicker1;
+        private Label label36;
+        private Label label33;
+        private ComboBox comboBox2;
+        private ComboBox comboBox3;
+        private Button btnDelRoute;
+        private Button btnEditRoute;
+        private Button btnAddRoute;
+        private ListBox lbRoutes;
+        private Label label35;
+        private Label label37;
+        private Label label38;
+        private Label label39;
     }
 }

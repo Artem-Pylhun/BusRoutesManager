@@ -24,5 +24,7 @@ namespace BusRoutesManager.Domain.Entities
         public virtual BusStation DepartureStation { get; set; }
 
         public DateTime RouteDate { get; set; }
+
+        public virtual Route Route { get; set; }
     }
 }

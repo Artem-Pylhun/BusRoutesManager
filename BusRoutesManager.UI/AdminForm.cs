@@ -72,8 +72,8 @@ namespace BusRoutesManager.UI
             btnEditBusStation.Enabled = false;
             btnDelBusStation.Enabled = false;
             //other components
-            dtpBusStationShiftEnd.CustomFormat = "MM/dd/yyyy hh:mm:ss";
-            dtpBusStationShiftStart.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            dtpBusStationShiftEnd.CustomFormat = "MM/dd/yyyy HH:mm:ss";
+            dtpBusStationShiftStart.CustomFormat = "MM/dd/yyyy HH:mm:ss";
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -489,10 +489,10 @@ namespace BusRoutesManager.UI
                     if (cbBusStationCity.SelectedIndex != -1
                         && tbBusStationTitle.Text != string.Empty
                         && tbBusStationAddress.Text != string.Empty
-                        && dtpBusStationShiftStart.Value.TimeOfDay < dtpBusStationShiftEnd.Value.TimeOfDay)
+                        && dtpBusStationShiftStart.Value.TimeOfDay <= dtpBusStationShiftEnd.Value.TimeOfDay)
                     {
                         var current_city = cityRepository.GetAll().FirstOrDefault(x => x.Title == cbBusStationCity.SelectedItem.ToString());
-                        var currentBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(" ")[0].Trim() && x.City == current_city);
+                        var currentBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(",")[0].Trim());
                         currentBusStation.Title = tbBusStationTitle.Text;
                         currentBusStation.City = current_city;
                         currentBusStation.Address = tbBusStationAddress.Text;
@@ -500,14 +500,19 @@ namespace BusRoutesManager.UI
                         currentBusStation.ShiftEnd = dtpBusStationShiftEnd.Value;
                         busStationRepository.Update(currentBusStation);
                         busStationRepository.SaveChanges();
-                        UpdateBusListBox();
+                        UpdateBusStationsListBox();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bus station wasn't updated", "Updating Bus Station", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     }
                     break;
                 case "del":
                     if (lbBusStations.SelectedIndex != -1)
                     {
                         var current_city = cityRepository.GetAll().FirstOrDefault(x => x.Title == cbBusStationCity.SelectedItem.ToString());
-                        var currentBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(" ")[0].Trim() && x.City == current_city);
+                        var currentBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(",")[0].Trim() && x.City == current_city);
                         if (currentBusStation == null)
                         {
                             MessageBox.Show("Bus station doesn't exist.", "Deleting Bus Station", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -599,7 +604,7 @@ namespace BusRoutesManager.UI
             {
                 btnEditBusStation.Enabled = true;
                 btnDelBusStation.Enabled = true;
-                BusStation selectedBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split()[0].Trim() && x.City.Title == lbBusStations.SelectedItem.ToString().Split()[1].Trim());
+                BusStation selectedBusStation = busStationRepository.GetAll().FirstOrDefault(x => x.Title == lbBusStations.SelectedItem.ToString().Split(",")[0].Trim() && x.City.Title == lbBusStations.SelectedItem.ToString().Split(",")[1].Trim());
                 tbBusStationTitle.Text = selectedBusStation.Title;
                 cbBusStationCity.SelectedItem = selectedBusStation.City.Title;
                 tbBusStationAddress.Text = selectedBusStation.Address;

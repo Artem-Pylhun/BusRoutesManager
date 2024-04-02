@@ -19,5 +19,6 @@ namespace BusRoutesManager.Domain.Entities
         public DateTime ArrivalTime { get; set; }
         public int DayOfWeek { get; set; }
         public virtual ICollection<RouteNode> RouteNodes { get; set; } = new HashSet<RouteNode>();
+        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }
 }
