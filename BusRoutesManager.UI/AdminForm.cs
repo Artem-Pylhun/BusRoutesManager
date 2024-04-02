@@ -50,10 +50,13 @@ namespace BusRoutesManager.UI
             lbUsers.Items.AddRange(userRepository.GetAll().Select(u => $"{u.FullName}, {u.DateOfBirth.ToShortDateString()}, {u.Email}, Admin: {u.IsAdmin}").ToArray());
             lbCities.Items.AddRange(cityRepository.GetAll().Select(c => c.Title).ToArray());
             lbBusStations.Items.AddRange(busStationRepository.GetAll().Select(b => $"{b.Title}, {b.City.Title}, {b.Address}, {b.ShiftStart}-{b.ShiftEnd}").ToArray());
+            lbRoutes.Items.AddRange(routeRepository.GetAll().Select(r => $"{r.Id}, {r.Bus.Model.Title} - {r.Bus.PlateNumber}, {r.Driver.FullName}, {r.DepartureTime}-{r.ArrivalTime}").ToArray());
             //combo boxes
             cbBusModel.Items.AddRange(modelRepository.GetAll().Select(x => x.Title).ToArray());
             cbBusStationCity.Items.AddRange(cityRepository.GetAll().Select(x => x.Title).ToArray());
 
+            cbRouteBus.Items.AddRange(busRepository.GetAll().Select(x => $"{x.Model.Title}, {x.PlateNumber}").ToArray());
+            cbRouteDriver.Items.AddRange(driverRepository.GetAll().Select(x => $"{x.FullName}, {x.MobilePhone}").ToArray());
             //buttons
             btnEditBus.Enabled = false;
             btnDelBus.Enabled = false;
@@ -72,9 +75,21 @@ namespace BusRoutesManager.UI
 
             btnEditBusStation.Enabled = false;
             btnDelBusStation.Enabled = false;
+
+            btnEditRoute.Enabled = false;
+            btnDelRoute.Enabled = false;
+
+            btnEditTicket.Enabled = false;
+            btnDelTicket.Enabled = false;
+
+            btnEditRouteNode.Enabled = false;
+            btnDelRouteNode.Enabled = false; 
             //other components
             dtpBusStationShiftEnd.CustomFormat = "MM/dd/yyyy HH:mm:ss";
             dtpBusStationShiftStart.CustomFormat = "MM/dd/yyyy HH:mm:ss";
+
+            dtpRouteArrivalTime.CustomFormat = "MM/dd/yyyy HH:mm:ss";
+            dtpRouteDepartureTime.CustomFormat = "MM/dd/yyyy HH:mm:ss";
         }
 
         private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -99,6 +114,7 @@ namespace BusRoutesManager.UI
                         });
                         busRepository.SaveChanges();
                         UpdateBusListBox();
+                        UpdateRoutesListBox();
                     }
                     else
                     {
@@ -115,6 +131,7 @@ namespace BusRoutesManager.UI
                         currentBus.PlateNumber = tbBusPlateNum.Text;
                         busRepository.SaveChanges();
                         UpdateBusListBox();
+                        UpdateRoutesListBox();
                     }
                     break;
                 case "del":
@@ -130,6 +147,7 @@ namespace BusRoutesManager.UI
                         busRepository.Delete(selectedBusId);
                         busRepository.SaveChanges();
                         UpdateBusListBox();
+                        UpdateRoutesListBox();
                         MessageBox.Show("Bus was deleted successfully", "Deleting Bus", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
@@ -147,6 +165,8 @@ namespace BusRoutesManager.UI
             lbBuses.Items.AddRange(busRepository.GetAll().Select(b => $"{b.Id} Seats: {b.Capacity} {b.Model.Title} {b.PlateNumber}").ToArray());
             tbBusPlateNum.Text = string.Empty;
             nudBusCapacity.Value = nudBusCapacity.Minimum;
+            cbRouteBus.Items.Clear();
+            cbRouteBus.Items.AddRange(busRepository.GetAll().Select(x => $"{x.Model.Title}, {x.PlateNumber}").ToArray());
             cbBusModel.SelectedIndex = -1;
         }
 
@@ -157,7 +177,7 @@ namespace BusRoutesManager.UI
             {
                 case "add":
                     if (tbModelTitle.Text != string.Empty
-                        && modelRepository.GetAll().FirstOrDefault(m => m.Title == tbModelTitle.Text) != null)
+                        && modelRepository.GetAll().FirstOrDefault(m => m.Title == tbModelTitle.Text) == null)
                     {
                         modelRepository.Insert(new Model()
                         {
@@ -240,6 +260,7 @@ namespace BusRoutesManager.UI
                         });
                         driverRepository.SaveChanges();
                         UpdateDriversListBox();
+                        UpdateRoutesListBox(); 
                     }
                     else
                     {
@@ -260,6 +281,7 @@ namespace BusRoutesManager.UI
                         driverRepository.Update(selectedDriver);
                         driverRepository.SaveChanges();
                         UpdateDriversListBox();
+                        UpdateRoutesListBox();
                         MessageBox.Show("Driver was updated successfully", "Updating driver", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -280,6 +302,7 @@ namespace BusRoutesManager.UI
                         driverRepository.Delete(selectedDriver);
                         driverRepository.SaveChanges();
                         UpdateDriversListBox();
+                        UpdateRoutesListBox();
                         MessageBox.Show("Driver was deleted successfully", "Deleting Driver", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
@@ -294,6 +317,9 @@ namespace BusRoutesManager.UI
         {
             lbDrivers.Items.Clear();
             lbDrivers.Items.AddRange(driverRepository.GetAll().Select(d => $"{d.FullName}, {d.Age}, {d.MobilePhone}").ToArray());
+            cbRouteDriver.Items.Clear();
+            cbRouteDriver.Items.AddRange(driverRepository.GetAll().Select(x => $"{x.FullName}, {x.MobilePhone}").ToArray());
+
         }
         private void btnUser(object sender, EventArgs e)
         {
@@ -543,11 +569,90 @@ namespace BusRoutesManager.UI
         }
         private void btnRoute(object sender, EventArgs e)
         {
+            Button button = sender as Button;
+            switch (button.Tag.ToString())
+            {
+                case "add":
+                    if (cbRouteBus.SelectedIndex != -1
+                        && cbRouteDriver.SelectedIndex != 1
+                        && dtpRouteDepartureTime.Value.TimeOfDay < dtpRouteArrivalTime.Value.TimeOfDay)
+                    {
+                        string[] splitter = cbRouteBus.SelectedItem.ToString().Split(',');
+                        routeRepository.Insert(new Route()
+                        {
+                            Bus = busRepository.GetAll().FirstOrDefault(x => x.Model.Title == cbRouteBus.SelectedItem.ToString().Split(',')[0].Trim() && x.PlateNumber == cbRouteBus.SelectedItem.ToString().Split(',')[1].Trim()),
+                            Driver = driverRepository.GetAll().FirstOrDefault(x => x.FullName == cbRouteDriver.SelectedItem.ToString().Split(',')[0].Trim() && x.MobilePhone == cbRouteDriver.SelectedItem.ToString().Split(',')[1].Trim()),
+                            DayOfWeek = (int)nudRouteDayOfWeek.Value,
+                            DepartureTime = dtpRouteDepartureTime.Value,
+                            ArrivalTime = dtpRouteArrivalTime.Value
+                        });
+                        routeRepository.SaveChanges();
+                        UpdateRoutesListBox();
+                    }
+                    else
+                    {
+                        MessageBox.Show(" Route can't be added. Fill in all the text boxes.", "Adding Route", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    break;
+                case "edit":
+                    if (cbRouteBus.SelectedIndex != -1
+                        && cbRouteDriver.SelectedIndex != -1
+                        && dtpRouteDepartureTime.Value.TimeOfDay < dtpRouteArrivalTime.Value.TimeOfDay)
+                    {
+                        var current_bus = busRepository.GetAll().FirstOrDefault(x => x.Model.Title == cbRouteBus.SelectedItem.ToString().Split(',')[0].Trim() && x.PlateNumber == cbRouteBus.SelectedItem.ToString().Split(',')[1].Trim());
+                        var current_driver = driverRepository.GetAll().FirstOrDefault(x => x.FullName == cbRouteDriver.SelectedItem.ToString().Split(',')[0].Trim() && x.MobilePhone == cbRouteDriver.SelectedItem.ToString().Split(',')[1].Trim());
 
+
+                        var currentRoute = routeRepository.GetAll().FirstOrDefault(x => x.Id == int.Parse(lbBusStations.SelectedItem.ToString().Split(",")[0].Trim()));
+                        currentRoute.Bus = current_bus;
+                        currentRoute.Driver= current_driver;
+                        currentRoute.DayOfWeek = (int)nudRouteDayOfWeek.Value;
+                        currentRoute.DepartureTime = dtpRouteDepartureTime.Value;
+                        currentRoute.ArrivalTime = dtpRouteArrivalTime.Value;
+                        routeRepository.Update(currentRoute);
+                        routeRepository.SaveChanges();
+                        UpdateRoutesListBox();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Route wasn't updated", "Updating Route", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                    break;
+                case "del":
+                    if (lbRoutes.SelectedIndex != -1)
+                    {
+                        var current_bus = busRepository.GetAll().FirstOrDefault(x => x.Model.Title == cbRouteBus.SelectedItem.ToString().Split(',')[0].Trim() && x.PlateNumber == cbRouteBus.SelectedItem.ToString().Split(',')[1].Trim());
+                        var current_driver = driverRepository.GetAll().FirstOrDefault(x => x.FullName == cbRouteDriver.SelectedItem.ToString().Split(',')[0].Trim() && x.MobilePhone == cbRouteDriver.SelectedItem.ToString().Split(',')[1].Trim());
+
+
+                        var currentRoute = routeRepository.GetAll().FirstOrDefault(x => x.Id == int.Parse(lbBusStations.SelectedItem.ToString().Split(",")[0].Trim()));
+                        if (currentRoute == null)
+                        {
+                            MessageBox.Show("Route doesn't exist.", "Deleting Route", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        routeRepository.Delete(currentRoute);
+                        routeRepository.SaveChanges();
+                        UpdateRoutesListBox();
+                        MessageBox.Show("Route was deleted successfully", "Deleting Route", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Route can't be deleted. Did you pick it in listbox?", "Deleting Route", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    break;
+            }
         }
         private void UpdateRoutesListBox()
         {
-
+            lbRoutes.Items.Clear();
+            lbRoutes.Items.AddRange(routeRepository.GetAll().Select(r => $"{r.Id}, {r.Bus.Model.Title} - {r.Bus.PlateNumber}, {r.Driver.FullName}, {r.DepartureTime}-{r.ArrivalTime}").ToArray());
+            nudRouteDayOfWeek.Value = nudRouteDayOfWeek.Minimum;
+            dtpRouteArrivalTime.Value = DateTime.Now.Date.AddHours(0);
+            dtpRouteDepartureTime.Value = DateTime.Now.Date.AddHours(12);
+            cbRouteBus.SelectedIndex = -1;
+            cbRouteDriver.SelectedIndex = -1;
         }
         private void btnTicket(object sender, EventArgs e)
         {
@@ -650,7 +755,18 @@ namespace BusRoutesManager.UI
 
         private void lbRoutes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbRoutes.SelectedIndex != -1)
+            {
+                btnEditRoute.Enabled = true;
+                btnDelRoute.Enabled = true;
 
+                Route selectedRoute = routeRepository.GetAll().FirstOrDefault(x => x.Id == int.Parse(lbRoutes.SelectedItem.ToString().Split(",")[0].Trim()));
+                cbRouteBus.SelectedItem = $"{selectedRoute.Bus.Model.Title}, {selectedRoute.Bus.PlateNumber}";
+                cbRouteDriver.SelectedItem = $"{selectedRoute.Driver.FullName}, {selectedRoute.Driver.MobilePhone}";
+                nudRouteDayOfWeek.Value = selectedRoute.DayOfWeek;
+                dtpRouteArrivalTime.Value = selectedRoute.ArrivalTime;
+                dtpRouteDepartureTime.Value = selectedRoute.DepartureTime;
+            }
         }
     }
 

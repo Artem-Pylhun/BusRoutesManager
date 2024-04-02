@@ -128,7 +128,7 @@
             label29 = new Label();
             tabPage5 = new TabPage();
             nudRouteDayOfWeek = new NumericUpDown();
-            dtpRouteDepartureDate = new DateTimePicker();
+            dtpRouteDepartureTime = new DateTimePicker();
             dtpRouteArrivalTime = new DateTimePicker();
             label36 = new Label();
             label33 = new Label();
@@ -1136,20 +1136,20 @@
             // label26
             // 
             label26.AutoSize = true;
-            label26.Location = new Point(236, 206);
+            label26.Location = new Point(223, 206);
             label26.Name = "label26";
-            label26.Size = new Size(127, 20);
+            label26.Size = new Size(160, 20);
             label26.TabIndex = 25;
-            label26.Text = "Departure Station";
+            label26.Text = "Departure Route Node";
             // 
             // label27
             // 
             label27.AutoSize = true;
-            label27.Location = new Point(258, 150);
+            label27.Location = new Point(236, 150);
             label27.Name = "label27";
-            label27.Size = new Size(103, 20);
+            label27.Size = new Size(136, 20);
             label27.TabIndex = 26;
-            label27.Text = "Arrival Station";
+            label27.Text = "Arrival Route Node";
             // 
             // label28
             // 
@@ -1172,7 +1172,7 @@
             // tabPage5
             // 
             tabPage5.Controls.Add(nudRouteDayOfWeek);
-            tabPage5.Controls.Add(dtpRouteDepartureDate);
+            tabPage5.Controls.Add(dtpRouteDepartureTime);
             tabPage5.Controls.Add(dtpRouteArrivalTime);
             tabPage5.Controls.Add(label36);
             tabPage5.Controls.Add(label33);
@@ -1200,39 +1200,39 @@
             nudRouteDayOfWeek.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
             nudRouteDayOfWeek.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudRouteDayOfWeek.Name = "nudRouteDayOfWeek";
-            nudRouteDayOfWeek.Size = new Size(117, 27);
+            nudRouteDayOfWeek.Size = new Size(183, 27);
             nudRouteDayOfWeek.TabIndex = 68;
             nudRouteDayOfWeek.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // dtpRouteDepartureDate
+            // dtpRouteDepartureTime
             // 
-            dtpRouteDepartureDate.Format = DateTimePickerFormat.Custom;
-            dtpRouteDepartureDate.Location = new Point(399, 261);
-            dtpRouteDepartureDate.Name = "dtpRouteDepartureDate";
-            dtpRouteDepartureDate.Size = new Size(136, 27);
-            dtpRouteDepartureDate.TabIndex = 67;
+            dtpRouteDepartureTime.Format = DateTimePickerFormat.Custom;
+            dtpRouteDepartureTime.Location = new Point(399, 261);
+            dtpRouteDepartureTime.Name = "dtpRouteDepartureTime";
+            dtpRouteDepartureTime.Size = new Size(194, 27);
+            dtpRouteDepartureTime.TabIndex = 67;
             // 
             // dtpRouteArrivalTime
             // 
             dtpRouteArrivalTime.Format = DateTimePickerFormat.Custom;
             dtpRouteArrivalTime.Location = new Point(399, 311);
             dtpRouteArrivalTime.Name = "dtpRouteArrivalTime";
-            dtpRouteArrivalTime.Size = new Size(136, 27);
+            dtpRouteArrivalTime.Size = new Size(194, 27);
             dtpRouteArrivalTime.TabIndex = 67;
             // 
             // label36
             // 
             label36.AutoSize = true;
-            label36.Location = new Point(422, 238);
+            label36.Location = new Point(451, 238);
             label36.Name = "label36";
-            label36.Size = new Size(112, 20);
+            label36.Size = new Size(113, 20);
             label36.TabIndex = 66;
-            label36.Text = "Departure Date";
+            label36.Text = "Departure Time";
             // 
             // label33
             // 
             label33.AutoSize = true;
-            label33.Location = new Point(422, 288);
+            label33.Location = new Point(466, 288);
             label33.Name = "label33";
             label33.Size = new Size(89, 20);
             label33.TabIndex = 66;
@@ -1244,7 +1244,7 @@
             cbRouteDriver.FormattingEnabled = true;
             cbRouteDriver.Location = new Point(396, 145);
             cbRouteDriver.Name = "cbRouteDriver";
-            cbRouteDriver.Size = new Size(139, 28);
+            cbRouteDriver.Size = new Size(197, 28);
             cbRouteDriver.TabIndex = 64;
             // 
             // cbRouteBus
@@ -1253,7 +1253,7 @@
             cbRouteBus.FormattingEnabled = true;
             cbRouteBus.Location = new Point(396, 81);
             cbRouteBus.Name = "cbRouteBus";
-            cbRouteBus.Size = new Size(139, 28);
+            cbRouteBus.Size = new Size(197, 28);
             cbRouteBus.TabIndex = 65;
             // 
             // btnDelRoute
@@ -1311,7 +1311,7 @@
             // label37
             // 
             label37.AutoSize = true;
-            label37.Location = new Point(437, 122);
+            label37.Location = new Point(486, 122);
             label37.Name = "label37";
             label37.Size = new Size(49, 20);
             label37.TabIndex = 56;
@@ -1320,7 +1320,7 @@
             // label38
             // 
             label38.AutoSize = true;
-            label38.Location = new Point(422, 176);
+            label38.Location = new Point(451, 176);
             label38.Name = "label38";
             label38.Size = new Size(95, 20);
             label38.TabIndex = 57;
@@ -1329,7 +1329,7 @@
             // label39
             // 
             label39.AutoSize = true;
-            label39.Location = new Point(445, 51);
+            label39.Location = new Point(486, 58);
             label39.Name = "label39";
             label39.Size = new Size(32, 20);
             label39.TabIndex = 58;
@@ -1462,7 +1462,7 @@
         private Label label28;
         private Label label29;
         private NumericUpDown nudRouteDayOfWeek;
-        private DateTimePicker dtpRouteDepartureDate;
+        private DateTimePicker dtpRouteDepartureTime;
         private DateTimePicker dtpRouteArrivalTime;
         private Label label36;
         private Label label33;
