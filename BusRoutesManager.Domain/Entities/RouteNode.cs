@@ -16,5 +16,9 @@ namespace BusRoutesManager.Domain.Entities
         public virtual BusStation Station { get; set; }
         public virtual Route Route { get; set; }
         public DateTime ArrivalTime { get; set; }
+
+        public virtual ICollection<Ticket> ArrivalTickets { get; set; } = new List<Ticket>();
+        public virtual ICollection<Ticket> DepartureTickets { get; set; } = new List<Ticket>();
+
     }
 }

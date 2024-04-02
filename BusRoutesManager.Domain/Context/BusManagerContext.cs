@@ -32,15 +32,15 @@ namespace BusRoutesManager.Domain.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.ArrivalStation)
+                .HasOne(t => t.ArrivalRouteNode)
                 .WithMany(s => s.ArrivalTickets)
-                .HasForeignKey(t => t.ArrivalStationId)
+                .HasForeignKey(t => t.ArrivalRouteNodeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Ticket>()
-                .HasOne(t => t.DepartureStation)
+                .HasOne(t => t.DepartureRouteNode)
                 .WithMany(s => s.DepartureTickets)
-                .HasForeignKey(t => t.DepartureStationId)
+                .HasForeignKey(t => t.DepartureRouteNodeId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

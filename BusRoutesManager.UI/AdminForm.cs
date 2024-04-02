@@ -53,6 +53,7 @@ namespace BusRoutesManager.UI
             //combo boxes
             cbBusModel.Items.AddRange(modelRepository.GetAll().Select(x => x.Title).ToArray());
             cbBusStationCity.Items.AddRange(cityRepository.GetAll().Select(x => x.Title).ToArray());
+
             //buttons
             btnEditBus.Enabled = false;
             btnDelBus.Enabled = false;
@@ -540,6 +541,31 @@ namespace BusRoutesManager.UI
             dtpBusStationShiftEnd.Value = DateTime.Now.Date.AddHours(12);
             cbBusStationCity.SelectedIndex = -1;
         }
+        private void btnRoute(object sender, EventArgs e)
+        {
+
+        }
+        private void UpdateRoutesListBox()
+        {
+
+        }
+        private void btnTicket(object sender, EventArgs e)
+        {
+
+        }
+        private void UpdateTicketsListBox()
+        {
+
+        }
+
+        private void btnRouteNode(object sender, EventArgs e)
+        {
+
+        }
+        private void UpdateRouteNodesListBox()
+        {
+
+        }
         private void lbBuses_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbBuses.SelectedIndex != -1)
@@ -611,6 +637,20 @@ namespace BusRoutesManager.UI
                 dtpBusStationShiftStart.Value = selectedBusStation.ShiftStart;
                 dtpBusStationShiftEnd.Value = selectedBusStation.ShiftEnd;
             }
+        }
+        private void lbTickets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbRouteNodes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbRoutes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

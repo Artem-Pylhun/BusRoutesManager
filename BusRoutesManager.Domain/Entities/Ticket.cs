@@ -15,13 +15,13 @@ namespace BusRoutesManager.Domain.Entities
         public int Id { get; set; }
         public virtual User User{ get; set; }
         public float Price { get; set; }
-        [ForeignKey("ArrivalStation")]
-        public int ArrivalStationId { get; set; }
-        public virtual BusStation ArrivalStation { get; set; }
+        [ForeignKey("ArrivalRouteNode")]
+        public int ArrivalRouteNodeId { get; set; }
+        public virtual RouteNode ArrivalRouteNode { get; set; }
 
-        [ForeignKey("DepartureStation")]
-        public int DepartureStationId { get; set; }
-        public virtual BusStation DepartureStation { get; set; }
+        [ForeignKey("DepartureRouteNode")]
+        public int DepartureRouteNodeId { get; set; }
+        public virtual RouteNode DepartureRouteNode { get; set; }
 
         public DateTime RouteDate { get; set; }
 
